@@ -8,7 +8,14 @@ const playerSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Game",
     },
-    // TODO limit to 25
+    username: {
+      type: String,
+    },
+    pinCode: {
+      type: Number,
+      minLength: 4,
+      maxLength: 4,
+    },
     anecdotes: [
       {
         type: Schema.Types.ObjectId,

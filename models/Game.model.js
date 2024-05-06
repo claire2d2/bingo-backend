@@ -7,12 +7,6 @@ const gameSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    players: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Player",
-      },
-    ],
     launched: {
       type: Boolean,
       default: false,

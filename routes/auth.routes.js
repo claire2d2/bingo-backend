@@ -10,9 +10,7 @@ const SALT = 10;
 
 router.post("/signup", async (req, res, next) => {
   try {
-    const { firstName, lastName, email, password } = req.body;
-    // in front end, input figures state when user signs up, to initialize each figure to "not seen yet"
-    const { figures } = req.body;
+    const { email, password } = req.body;
     // if user already exists, error
     const foundUser = await User.findOne({ email });
     if (foundUser) {
@@ -21,8 +19,6 @@ router.post("/signup", async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, SALT);
     const createdUser = await User.create({
       email,
-      firstName,
-      lastName,
       password: hashedPassword,
     });
 
