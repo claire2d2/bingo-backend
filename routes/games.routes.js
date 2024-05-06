@@ -22,7 +22,7 @@ router.post("/", async (req, res, next) => {
     const createdGame = await Game.create({
       creator: creator,
     });
-    res.status(200).json(createdGame);
+    res.status(201).json(createdGame);
   } catch (error) {
     next(error);
   }
