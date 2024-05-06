@@ -4,15 +4,6 @@ const isAuthenticated = require("../middlewares/isAuthenticated");
 
 //! all routes here are prefixed with /api/games
 
-router.get("/", async (req, res, next) => {
-  try {
-    const allGames = await Game.find({});
-    res.status(200).json(allGames);
-  } catch (error) {
-    next(error);
-  }
-});
-
 router.use(isAuthenticated);
 
 // create a new game for a logged in user
@@ -23,6 +14,16 @@ router.post("/", async (req, res, next) => {
       creator: creator,
     });
     res.status(201).json(createdGame);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/:gameId", async (req, res, next) => {
+  try {
+    const id = req.params.gameId;
+    const foundGame = await Game.findById(id);
+    res.status(200).json(foundGame);
   } catch (error) {
     next(error);
   }

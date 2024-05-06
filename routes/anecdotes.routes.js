@@ -6,9 +6,10 @@ const Anecdote = require("../models/Anecdote.model");
 
 // router.use(isAuthenticated);
 
-router.get("/", async (req, res, next) => {
+router.get("/:gameId", async (req, res, next) => {
   try {
-    const allAnecdotes = await Anecdote.find({});
+    const id = req.params.gameId;
+    const allAnecdotes = await Anecdote.find({ game: id });
     res.status(200).json(allAnecdotes);
   } catch (error) {
     next(error);
