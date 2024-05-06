@@ -51,4 +51,13 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
+router.get("/verify", isAuthenticated, async (req, res, next) => {
+  try {
+    const user = await User.findById(req.currentUserId);
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

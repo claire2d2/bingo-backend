@@ -11,7 +11,7 @@ const MONGO_URI =
 mongoose
   .connect(MONGO_URI)
   .then((x) => {
-    const dbName = x.connections[0].name;
+    const dbName = x.connection.name;
     console.log(`Connected to Mongo! Database name: "${dbName}"`);
   })
   .catch((err) => {
