@@ -30,18 +30,30 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-// modify game state to change whether the game is launched or not
-router.put("/:gameId", async (req, res, next) => {
+// update anecdote content
+router.put("/one/:anecdoteId", async (req, res, next) => {
   try {
-    const id = req.params.gameId;
-    const { launched } = req.body;
-    const isGameLaunched = { launched };
-    const updateGameStatus = await Game.findOneAndUpdate(
+    const id = req.params.anecdoteId;
+    const { title } = req.body;
+    const newTitle = { title };
+    const updatedAnecdote = await Anecdote.findOneAndUpdate(
       { _id: id },
-      isGameLaunched,
+      newTitle,
       { new: true }
     );
-    res.status(200).json(updateGameStatus);
+    res.status(200).json(updatedAnecdote);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// delete an anecdote
+
+router.delete("/one/:anecdoteId", async (req, res, next) => {
+  try {
+    const id = req.params.anecdoteId;
+    await Anecdote.findOneAndDelete({ _id: id });
+    res.sendStatus(204);
   } catch (error) {
     next(error);
   }

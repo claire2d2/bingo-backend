@@ -10,7 +10,10 @@ router.use(isAuthenticated);
 router.post("/", async (req, res, next) => {
   try {
     const creator = req.currentUserId;
+    const { name } = req.body;
+    const gameName = { name };
     const createdGame = await Game.create({
+      name: gameName,
       creator: creator,
     });
     res.status(201).json(createdGame);
