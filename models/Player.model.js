@@ -12,7 +12,7 @@ const playerSchema = new Schema(
       type: String,
     },
     pinCode: {
-      type: Number,
+      type: String,
       minLength: 4,
       maxLength: 4,
     },
